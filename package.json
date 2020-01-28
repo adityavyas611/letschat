@@ -7,9 +7,6 @@
   "license": "MIT",
   "private": true,
   "workspaces": ["client","server"],
-  "devDependencies": {
-    "jest": "^25.1.0  "
-  },
   "scripts": {
     "client": "yarn workspace client",
     "server": "yarn workspace server",
