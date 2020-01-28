@@ -1,0 +1,18 @@
+{
+  "name": "letschat",
+  "version": "1.0.0",
+  "description": "A video chat app",
+  "main": "index.js",
+  "author": "Aditya Vyas",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["client","server"],
+  "devDependencies": {
+    "jest": "^25.1.0  "
+  },
+  "scripts": {
+    "client": "yarn workspace client",
+    "server": "yarn workspace server",
+    "start": "yarn client start && yarn server start"
+  }
+}

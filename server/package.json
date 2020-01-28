@@ -1,0 +1,12 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Small Backend for Server",
+  "main": "app.js",
+  "author": "Aditya Vyas",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  }
+}
