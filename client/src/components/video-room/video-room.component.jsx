@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Peer from 'peerjs';
 import { withRouter } from 'react-router-dom';
 import VideoControl from '../video-control/video-control.component';
+import { qvgaConstraints, vgaConstraints, hdConstraints } from '../../constants';
 
 import './video-room.style.scss';
 
@@ -14,6 +15,12 @@ class VideoRoom extends Component {
     isMute: false
   }
 
+  getMedia = (constraints) => {
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then((stream) => this.setState({ ...this.state, localStream: stream }))
+      .catch((error) => { throw error });
+  };
+
   componentDidMount() {
     this.peer = new Peer();
     this.peer.on('open', (peerId) => this.setState({ ...this.state, peerId }));
@@ -23,23 +30,19 @@ class VideoRoom extends Component {
 
     this.setState({ roomId, remoteStream: "https://www.youtube.com/embed/DQuhA5ZCV9M?autoplay=1&controls=0&showinfo=0" });
 
-    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-      .then((stream) => this.setState({ ...this.state, localStream: stream }))
-      .catch((error) => { throw error });
-
-  }
+    this.getMedia(hdConstraints);
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.localStream) {
       this.refs.localVideo.srcObject = nextState.localStream;
     }
-
     return true;
-  }
+  };
 
   onRecipientChange = (event) => {
     this.setState({ ...this.state, recipientId: event.target.value });
-  }
+  };
 
   onMuteCall = () => {
     const stream = this.state.localStream;
@@ -50,7 +53,23 @@ class VideoRoom extends Component {
     const isMute = this.state.isMute;
 
     this.setState({ isMute: !isMute });
-  }
+  };
+
+  onChangeResolution = (event) => {
+    const resolution = event.target.value;
+
+    switch (resolution) {
+      case 720:
+        this.getMedia(hdConstraints);
+        break;
+      case 480: 
+        this.getMedia(vgaConstraints);
+        break;
+      default:
+        this.getMedia(qvgaConstraints);
+        break;
+    }
+  };
 
   onDisconnectCall = () => {
     this.peer.disconnect();
@@ -66,7 +85,7 @@ class VideoRoom extends Component {
     this.setState({ localStream: null });
 
     this.props.history.push('/');
-  }
+  };
 
   render() {
     return (
@@ -74,7 +93,7 @@ class VideoRoom extends Component {
         <h3 className="video-room-header">room: {this.state.roomId}</h3>
         <video ref="localVideo" className="local-box" autoPlay />
         <iframe src={this.state.remoteStream} className="remote-box" title="remote"></iframe>
-        <VideoControl onDisconnectCall={this.onDisconnectCall} onMuteCall={this.onMuteCall} isMute={this.state.isMute} />
+        <VideoControl onDisconnectCall={this.onDisconnectCall} onMuteCall={this.onMuteCall} isMute={this.state.isMute} onChangeResolution={this.onChangeResolution} />
       </div>
     )
   }

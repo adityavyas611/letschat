@@ -1,12 +1,13 @@
 import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
+import DropDown from '../drop-down/drop-down.component';
 import Microphone from '../../assets/images/Microphone.webp';
 import MicrophoneMute from '../../assets/images/microphone-mute.png';
 import Disconnect from '../../assets/images/disconnect-512.png';
 
 import './video-control.style.scss';
 
-const VideoControl = ({ onDisconnectCall, onMuteCall, isMute }) => (
+const VideoControl = ({ onDisconnectCall, onMuteCall, isMute, onChangeResolution }) => (
   <div className="control-visible">
     <div className="video-control">
       <CustomButton handleOnClick={onMuteCall}>
@@ -18,6 +19,7 @@ const VideoControl = ({ onDisconnectCall, onMuteCall, isMute }) => (
       <CustomButton handleOnClick={onDisconnectCall}>
         <img src={Disconnect} className="control-button" alt="Disconnect" />
       </CustomButton>
+      <DropDown onChangeResolution={onChangeResolution}/>
     </div>
   </div>
 );

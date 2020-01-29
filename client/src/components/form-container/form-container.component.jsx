@@ -7,31 +7,36 @@ import VideoIcon from '../../assets/images/videoicon.png';
 import './form-container.style.scss';
 
 class FormContainer extends Component {
+  interval = '';
+
   state = {
     roomId: ''
   }
 
-  generateRoomId = () => {
-    setTimeout(() => {
+  getRoomId = () => {
+    setInterval(() => {
       const uid = Math.random().toString(36).substr(2, 9);
       this.setState({ roomId: uid });
     }, 5000);
   }
 
   componentDidMount() {
-    this.setState({roomId: '2dassd22d'});
+    this.interval = this.getRoomId();
+  }
+
+  componentDidUpdate() {
+    this.interval = this.getRoomId();
   }
 
   handleOnClick = () => {
     this.props.history.push(`/room/${this.state.roomId}`);
   };
 
-  componentWillUnmount(){
-    this.setState({roomId: ''});
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
-    this.generateRoomId();
     return (
       <div className="box">
         <div className="header">
