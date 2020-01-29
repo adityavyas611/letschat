@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import FormInput from '../form-input/form-input.component';
-import {withRouter} from 'react-router-dom';
-import Button from '../custom-button/custom-button.component';
+import { withRouter } from 'react-router-dom';
+import VideoIcon from '../../assets/images/videoicon.png';
+import CustomButton from '../custom-button/custom-button.component';
 import './form-container.style.scss';
 
 class FormContainer extends Component {
@@ -9,8 +10,15 @@ class FormContainer extends Component {
         roomId: ''
     }
 
+    generateRoomId = () => {
+        setTimeout(() => {
+            const uid = Math.random().toString(36).substr(2, 9);
+            this.setState({ roomId: uid });
+        }, 5000);
+    }
+
     componentDidMount() {
-        this.setState({ roomId: '2xsffsds3' });
+        this.generateRoomId();
     }
 
     handleOnClick = () => {
@@ -18,14 +26,9 @@ class FormContainer extends Component {
     };
 
     render() {
-
-        setTimeout(() => {
-            const uid = Math.random().toString(36).substr(2, 9);
-            this.setState({ roomId: uid });
-        }, 5000);
-
+        this.generateRoomId();
         return (
-            <div className="box flex">
+            <div className="box">
                 <div className="header">
                     <h3>LetsChat - Video Chat</h3>
                 </div>
@@ -39,9 +42,11 @@ class FormContainer extends Component {
                         readOnly
                         required
                     />
-                    <Button type="submit" value="Video Call" handleOnClick={this.handleOnClick}>
-                        Let's Chat
-                    </Button>
+                </div>
+                <div className="custom-button">
+                    <CustomButton type="submit" value="Video Call" handleOnClick={this.handleOnClick}>
+                        <img src={VideoIcon} alt="VideoCamera" />
+                    </CustomButton>
                 </div>
             </div>
         )

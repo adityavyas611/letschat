@@ -1,17 +1,5 @@
 .custom-button {
-    min-width: 165px;
-    width: auto;
-    height: 50px;
-    line-height: 50px;
-    font-size: 15px;
-    background-color: black;
-    color: white;
-    text-transform: uppercase;
+    background-color: inherit;
     border: none;
     cursor: pointer;
-}
-
-.button-container {
-    text-align: center;
-    margin-top: 100px;
 }

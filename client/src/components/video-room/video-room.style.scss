@@ -1,4 +1,3 @@
-
 .local-box {
     position: fixed;
     bottom: 1vh;
@@ -7,15 +6,14 @@
 }
 
 .remote-box {
-    position: fixed;
-    top: 7vh;
-    left: 2vh;
-    height: 85vh;
+    display: flex;
+    height: 75vh;
+    width: 150vh;
     z-index: -1;
 }   
 .video-room-header {
     display: block;
-    width: 205vh;
+    width: 99%;
     padding: 1vh;
     background-color: white;
     text-align: center;

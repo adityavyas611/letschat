@@ -1,0 +1,26 @@
+.control-visible {
+    width: 99%;
+    display: flex;
+    position: absolute;
+    bottom: 2%;
+    justify-content: center;
+    padding: 4px;
+
+    .video-control {
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+
+        .control-button {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+    }
+
+    &:hover {
+        .video-control{
+            opacity: 1;
+        }
+    }
+}
+
