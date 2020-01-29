@@ -22,7 +22,7 @@ class FormContainer extends Component {
         setTimeout(() => {
             const uid = Math.random().toString(36).substr(2, 9);
             this.setState({ roomId: uid });
-        }, 10000);
+        }, 5000);
 
         return (
             <div className="box flex">
@@ -36,6 +36,7 @@ class FormContainer extends Component {
                         label="Room Id"
                         value={this.state.roomId}
                         handleChange={this.handleChange}
+                        readOnly
                         required
                     />
                     <Button type="submit" value="Video Call" handleOnClick={this.handleOnClick}>
