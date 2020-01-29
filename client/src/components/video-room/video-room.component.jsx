@@ -9,6 +9,7 @@ class VideoRoom extends Component {
         localStream: undefined,
         remoteStream: undefined,
         recipientId: '',
+        roomId: ''
     }
 
     componentDidMount() {
@@ -16,14 +17,18 @@ class VideoRoom extends Component {
         this.peer.on('open', (peerId) => this.setState({ ...this.state, peerId }));
         this.peer.on('connection', (conn) => this.handleConnection(conn));
 
-        console.log(this.props.match.params.id);
+        const roomId = this.props.match.params.id;
+
+        this.setState({ roomId });
+
+        console.log(roomId);
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: true })
             .then((stream) => this.setState({ ...this.state, localStream: stream }))
             .catch((error) => { throw error });
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps, nextState) {
         if (nextState.localStream) {
             this.refs.localVideo.srcObject = nextState.localStream;
         }
@@ -31,8 +36,8 @@ class VideoRoom extends Component {
         if (nextState.remoteStream) {
             this.refs.remoteVideo.srcObject = nextState.remoteStream;
         }
+        return true;    
     }
-
 
     handleStream = (call) => {
         call.on('stream', (stream) => {
@@ -56,7 +61,7 @@ class VideoRoom extends Component {
     render() {
         return (
             <div className="video-room">
-                <h3 className="video-room-header">room: Aditya</h3>
+                <h3 className="video-room-header">room: {this.state.roomId}</h3>
                 <video ref="localVideo" className="local-box" autoPlay />
                 <video src={RemoteVideo} className="remote-box" autoPlay type="video/mp4" muted loop />
             </div>

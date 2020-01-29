@@ -2,12 +2,12 @@ import React from 'react';
 import './custom-button.style.scss';
 
 
-const CustomButton = ({ children, handleClick, ...props }) => (
-    <div className="button-container">
-        <button className='custom-button' onClick={handleClick} {...props}>
+const CustomButton = ({ children, handleOnClick, ...otherProps }) => (
+    < div className = "button-container" >
+        <button className='custom-button' onClick={handleOnClick} {...otherProps}>
             {children}
         </button>
-    </div>
+    </div >
 );
 
 export default CustomButton;
