@@ -2,7 +2,7 @@
 
 letschat is a video chat app built using peer.js
 
-Demo: https://nifty-shannon-5335c2.netlify.com/
+Demo: https://lets-chat.netlify.com/
 
 ## Git Clone
 
