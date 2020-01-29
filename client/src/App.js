@@ -10,7 +10,6 @@ function App() {
       <Switch>
         <Route exact path="/" component={FormContainer} />
         <Route path="/room/:id" component={VideoRoom} />
-        <FormContainer />
       </Switch>
     </div>
   );

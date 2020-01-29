@@ -18,11 +18,11 @@ $main-color: black;
         font-size: 18px;
         padding: 10px 10px 10px 5px;
         display: block;
-        width: 50vh;
+        width: auto;
         border: none;
         border-radius: 0;
         border-bottom: 1px solid $sub-color;
-        margin: 25px 225px 0;
+        margin: 25px 325px 0;
 
         &:focus {
             outline: none;
@@ -39,7 +39,7 @@ $main-color: black;
         font-weight: normal;
         position: absolute;
         pointer-events: none;
-        left: 225px;
+        left: 325px;
         top: 10px;
         transition: 300ms ease all;
 
